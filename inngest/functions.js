@@ -10,7 +10,7 @@ export const syncUserCreation = inngest.createFunction(
     await prisma.user.create({
       data: {
         id: data.id,
-        email: data.email_address[0].email_address,
+        email: data.email_addresses[0].email_address,
         name: `${data.first_name} ${data.last_name}`,
         image: data.image_url,
       },
@@ -26,9 +26,9 @@ export const syncUserUpdation = inngest.createFunction(
   async ({ event }) => {
     const { data } = event;
     await prisma.user.update({
-      where: { Id: data.id },
+      where: { id: data.id },
       data: {
-        email: data.email_address[0].email_address,
+        email: data.email_addresses[0].email_address,
         name: `${data.first_name} ${data.last_name}`,
         image: data.image_url,
       },
@@ -44,7 +44,7 @@ export const syncUserDeletion = inngest.createFunction(
   async ({ event }) => {
     const { data } = event;
     await prisma.user.delete({
-      where: { Id: data.id },
+      where: { id: data.id },
     });
   }
 );
