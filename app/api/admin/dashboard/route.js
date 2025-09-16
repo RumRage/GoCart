@@ -17,7 +17,7 @@ export async function GET(request) {
     // Get total orders
     const orders = await prisma.order.count();
     // Get total stores on app
-    const stores = await prisma.order.count();
+    const stores = await prisma.store.count();
     // Get all orders include only createdAt and total & calculate total revenue
     const allOrders = await prisma.order.findMany({
       select: {
