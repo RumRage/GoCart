@@ -12,6 +12,7 @@ async function main(base64Image, mimeType) {
             Your job is to analyze an image of a product and generate structured data.
 
             Respond ONLY with raw JSON (no code block, no markdown, no explanation).
+            Only in Spanish.
             The JSON must strictly follow this schema:
 
             {
@@ -31,7 +32,7 @@ async function main(base64Image, mimeType) {
         {
           type: "image_url",
           image_url: {
-            url: `data:${mimeType},${base64Image}`,
+            url: `data:${mimeType};base64,${base64Image}`,
           },
         },
       ],

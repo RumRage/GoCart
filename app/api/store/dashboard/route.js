@@ -12,11 +12,14 @@ export async function GET(request) {
     // Get all orders for seller
     const orders = await prisma.order.findMany({ where: { storeId } });
 
-    // Get all products with ratings for seller
-    const products = await prisma.order.findMany({ where: { storeId } });
+    // Get all products for this seller's store
+    const products = await prisma.product.findMany({
+      where: { storeId },
+      select: { id: true }, // solo necesitamos los ids
+    });
 
     const ratings = await prisma.rating.findMany({
-      where: { productId: { in: products.map((product) => product.id) } },
+      where: { productId: { in: products.map((p) => p.id) } },
       include: { user: true, product: true },
     });
 

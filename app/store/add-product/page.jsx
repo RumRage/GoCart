@@ -54,10 +54,12 @@ export default function StoreAddProduct() {
               "/api/store/ai",
               { base64Image: base64String, mimeType },
               {
-                headers: { Authorization: `Bearer ${token}` },
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  "Content-Type": "application/json",
+                },
               }
-            )
-          ),
+            ),
             {
               loading: "Analyzing image with AI...",
               success: (res) => {
@@ -74,7 +76,8 @@ export default function StoreAddProduct() {
                 return "AI could not analyze the image";
               },
               error: (err) => err?.response?.data?.error || err.message,
-            };
+            }
+          );
         } catch (error) {
           console.error(error);
         }
